@@ -3,7 +3,11 @@ import * as debug from 'debug';
 
 import App from './App';
 
+import * as dotenv from 'dotenv';
+
 debug('ts-express:server');
+
+dotenv.config();
 
 const port = normalizePort(process.env.PORT || 3000);
 App.set('port', port);
@@ -23,6 +27,7 @@ function normalizePort(val: number|string): number|string|boolean {
 function onError(error: NodeJS.ErrnoException): void {
   if (error.syscall !== 'listen') throw error;
   let bind = (typeof port === 'string') ? 'Pipe ' + port : 'Port ' + port;
+
   switch(error.code) {
     case 'EACCES':
       console.error(`${bind} requires elevated privileges`);
